@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Rose Day 🌹</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff5f6d, #ffc371);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.card {
+    background: rgba(255,255,255,0.2);
+    padding: 35px;
+    border-radius: 20px;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+h1 {
+    font-size: 2.3em;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.rose {
+    font-size: 3em;
+    margin: 15px 0;
+}
+
+button {
+    padding: 12px 22px;
+    margin: 10px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.yes {
+    background: #ff2e63;
+    color: white;
+}
+
+.no {
+    background: white;
+    color: #ff2e63;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <h1>Happy Rose Day 🌹</h1>
+    <div class="rose">🌹</div>
+    <p>
+        My love,<br><br>
+        This rose is for you ❤️<br>
+        Will you accept my Rose Day proposal?
+    </p>
+
+    <button class="yes" onclick="accept()">Yes 💖</button>
+    <button class="no" onclick="reject()">No 😜</button>
+</div>
+
+<script>
+let noCount = 0;
+
+function accept() {
+    document.getElementById("card").innerHTML = `
+        <h1>Yayyy! 💕</h1>
+        <div class="rose">🌹🌹🌹</div>
+        <p>
+            I knew it! ❤️<br><br>
+            Thank you for accepting my rose.<br>
+            You are my forever.
+        </p>
+    `;
+}
+
+function reject() {
+    noCount++;
+
+    const messages = [
+        "Are you sure? 😏",
+        "Think again 💕",
+        "My rose is getting sad 🌹😢",
+        "Last chance 😜",
+        "Okay okay… try YES 😍"
+    ];
+
+    alert(messages[Math.min(noCount - 1, messages.length - 1)]);
+}
+</script>
+
+</body>
+</html>
 
