@@ -15,37 +15,47 @@ body {
     font-family: 'Segoe UI', sans-serif;
     color: white;
     text-align: center;
+    overflow: hidden;
 }
 
 .card {
     background: rgba(255,255,255,0.2);
     padding: 35px;
-    border-radius: 20px;
-    max-width: 400px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border-radius: 25px;
+    max-width: 420px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    animation: fadeIn 1.5s ease;
 }
 
 h1 {
-    font-size: 2.3em;
+    font-size: 2.4em;
+    margin-bottom: 10px;
 }
 
 p {
-    font-size: 1.2em;
-    line-height: 1.5;
+    font-size: 1.15em;
+    line-height: 1.6;
 }
 
 .rose {
-    font-size: 3em;
+    font-size: 3.2em;
     margin: 15px 0;
+    animation: float 3s ease-in-out infinite;
+}
+
+.buttons {
+    margin-top: 25px;
+    position: relative;
 }
 
 button {
-    padding: 12px 22px;
+    padding: 12px 26px;
     margin: 10px;
     border: none;
     border-radius: 30px;
     font-size: 1em;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .yes {
@@ -53,9 +63,24 @@ button {
     color: white;
 }
 
+.yes:hover {
+    transform: scale(1.1);
+}
+
 .no {
     background: white;
     color: #ff2e63;
+    position: absolute;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 </style>
 </head>
@@ -71,40 +96,48 @@ button {
         Will you accept my Rose Day proposal?
     </p>
 
-    <button class="yes" onclick="accept()">Yes 💖</button>
-    <button class="no" onclick="reject()">No 😜</button>
+    <div class="buttons">
+        <button class="yes" onclick="accept()">Yes 💖</button>
+        <button class="no" id="noBtn" onmouseover="moveNo()">No 😜</button>
+    </div>
 </div>
 
 <script>
-let noCount = 0;
+let messages = [
+    "Are you sure? 🤭",
+    "Think again my love 💕",
+    "This rose is only for you 🌹",
+    "My heart says YES ❤️",
+    "Don’t break my heart 😭",
+    "Okay okay… just press YES 😍"
+];
+
+let msgIndex = 0;
+
+function moveNo() {
+    const btn = document.getElementById("noBtn");
+
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+
+    alert(messages[msgIndex]);
+    msgIndex = (msgIndex + 1) % messages.length;
+}
 
 function accept() {
     document.getElementById("card").innerHTML = `
-        <h1>Yayyy! 💕</h1>
+        <h1>You said YES 💖</h1>
         <div class="rose">🌹🌹🌹</div>
         <p>
-            I knew it! ❤️<br><br>
+            I knew it! 😍<br><br>
             Thank you for accepting my rose.<br>
-            You are my forever.
+            You are my today, tomorrow, and forever ❤️
         </p>
     `;
-}
-
-function reject() {
-    noCount++;
-
-    const messages = [
-        "Are you sure? 😏",
-        "Think again 💕",
-        "My rose is getting sad 🌹😢",
-        "Last chance 😜",
-        "Okay okay… try YES 😍"
-    ];
-
-    alert(messages[Math.min(noCount - 1, messages.length - 1)]);
 }
 </script>
 
 </body>
 </html>
-
